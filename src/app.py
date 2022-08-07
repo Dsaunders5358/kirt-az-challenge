@@ -1,6 +1,4 @@
 import pandas as pd
-import requests
-import csv
 from sqlalchemy import create_engine
 from src import sql_commands as sql
 
@@ -50,7 +48,7 @@ def generate_new_games_list(df):
             kda = row[f'Game {str(i)} Score'].split('/')
             time = row[f'Game {str(i)} Time']
             h, m, s = time.split(':')
-            time = int(h) * 3600 + int(m) * 60 + int(s)
+            time = int(h) * 3600 + int(m) * 60 + int(s) # Converts time into seconds
             new_row = {'champion_name' : champ_name, 'kills' : kda[0], 'deaths' : kda[1], 'assists' : kda [2], 'time_taken' : time}
             new_list.append(new_row)
     return new_list
